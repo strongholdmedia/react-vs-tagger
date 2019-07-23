@@ -1,32 +1,32 @@
-const webpack = require('webpack')
+const webpack = require("webpack");
 
 module.exports = {
-  entry: './example/main.js',
-  devtool: 'source-map',
+  entry: "./example/main.js",
+  devtool: "source-map",
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        loader: 'buble-loader',
+        loader: "buble-loader",
         exclude: /node_modules/,
         options: {
-          objectAssign: 'Object.assign'
+          objectAssign: "Object.assign"
         }
       }
     ]
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': { 'NODE_ENV': `"${process.env.NODE_ENV}"` }
+      "process.env": { "NODE_ENV": `"${process.env.NODE_ENV}"` }
     })
   ],
   output: {
-    filename: 'example/bundle.js'
+    filename: "example/bundle.js"
   },
   // resolve: {
   //   alias: {
-  //     'react': 'preact-compat',
-  //     'react-dom': 'preact-compat'
+  //     "react": "preact-compat",
+  //     "react-dom": "preact-compat"
   //   }
   // }
-}
+};
