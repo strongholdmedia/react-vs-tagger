@@ -1,78 +1,97 @@
-# React Tag Autocomplete
+# React VS Tagger
 
-[![Build status](https://api.travis-ci.org/i-like-robots/react-tags.svg?branch=master)](https://travis-ci.org/i-like-robots/react-tags) [![Coverage Status](https://coveralls.io/repos/github/i-like-robots/react-tags/badge.svg?branch=master)](https://coveralls.io/github/i-like-robots/react-tags)
+React VS Tagger is a simple tagging component ready to drop in your React projects.
+Originally based on the [React Tag Autocomplete project](https://github.com/i-like-robots/react-tag-autocomplete) by Matt Hinchliffe.
+Forked due to multiple reasons, namely:
 
-React Tag Autocomplete is a simple tagging component ready to drop in your React projects. Originally based on the [React Tags project](http://prakhar.me/react-tags/example) by Prakhar Srivastav this version removes the drag-and-drop re-ordering functionality, adds appropriate roles and ARIA states and introduces a resizing text input.
+* I supposed it were hard to argue for the original modification goal of making the input optional
+* "Standard JS" is completely unacceptable for me as any collaboration basis
 
-**Version 6 of this component is in beta! Please [take a look here](https://github.com/i-like-robots/react-tags/tree/6.0)** ✨
+Feel free to merge/cherry pick/whatever anything back to any predecessor/parent project.
 
-![Screenshot of React Tag Autocomplete](https://cloud.githubusercontent.com/assets/271645/25478773/54aa2bbe-2b3a-11e7-95cf-d419f3c24418.png)
+Project strives to maintain compatibility with :
+* ES5
+* Preact / Preact-Compat / PreactX
+* Non-Node runtimes (for usage)
+
+**Documentation is awkward / unlinted at the moment. Please bear with me while I fix it.**
 
 ## Installation
 
-This is a [Node.js] module available through the [npm] registry. Before installing, download and install Node.js.
+This is a Javascript module available through the [npm] registry. Before installing, download and install Node.js.
 
-Installation is done using the [npm install] command:
+Installation using [npm]:
 
 ```
-npm install --save react-tag-autocomplete
+npm install --save @dorgaren/react-vs-tagger
+```
+Using [yarn]:
+
+```
+yarn add @dorgaren/react-vs-tagger
 ```
 
-[Node.js]: https://nodejs.org/en/
-[npm]: https://www.npmjs.com/
-[npm install]: https://docs.npmjs.com/getting-started/installing-npm-packages-locally
+(this is untested but should work)
+
+[npm]: https://www.npmjs.com
+[yarn]: https://yarnpkg.com
 
 ## Usage
 
 Here's a sample implementation that initializes the component with a list of preselected `tags` and a `suggestions` list. For further customization details, see [options](#options).
 
 ```js
-import React from 'react'
-import ReactTags from 'react-tag-autocomplete'
+import React from "react";
+import Tagger from "@dorgaren/react-vs-tags";
 
-class App extends React.Component {
-  constructor (props) {
-    super(props)
+class App extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
 
-    this.state = {
-      tags: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Pears" }
-      ],
-      suggestions: [
-        { id: 3, name: "Bananas" },
-        { id: 4, name: "Mangos" },
-        { id: 5, name: "Lemons" },
-        { id: 6, name: "Apricots" }
-      ]
+        this.state = {
+            tags: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Pears" }
+            ],
+          suggestions: [
+                { id: 3, name: "Bananas" },
+                { id: 4, name: "Mangos" },
+                { id: 5, name: "Lemons" },
+                { id: 6, name: "Apricots" }
+            ]
+        };
     }
-  }
 
-  handleDelete (i) {
-    const tags = this.state.tags.slice(0)
-    tags.splice(i, 1)
-    this.setState({ tags })
-  }
+    handleDelete(index)
+    {
+        const tags = this.state.tags.slice(0);
+        tags.splice(index, 1);
+        this.setState({ tags });
+    }
 
-  handleAddition (tag) {
-    const tags = [].concat(this.state.tags, tag)
-    this.setState({ tags })
-  }
+    handleAddition(tag)
+    {
+        const tags = [].concat(this.state.tags, tag);
+        this.setState({ tags });
+    }
 
-  render () {
-    return (
-      <ReactTags
-        tags={this.state.tags}
-        suggestions={this.state.suggestions}
-        handleDelete={this.handleDelete.bind(this)}
-        handleAddition={this.handleAddition.bind(this)} />
-    )
-  }
+    render()
+    {
+        return (
+            <Tagger
+                tags={ this.state.tags }
+                suggestions={ this.state.suggestions }
+                handleDelete={ this.handleDelete.bind(this) }
+                handleAddition={ this.handleAddition.bind(this) }
+            />
+        );
+    }
 }
 
-React.render(<App />, document.getElementById('app'))
+React.render(<App />, document.getElementById('app'));
 ```
-
 
 ### Options
 
@@ -108,7 +127,7 @@ An array of selected tags. Each tag is an object which must have an `id` and a `
 const tags =  [
   { id: 1, name: 'Apples' },
   { id: 2, name: 'Pears' }
-]
+];
 ```
 
 #### suggestions (optional)

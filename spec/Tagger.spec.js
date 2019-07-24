@@ -6,7 +6,7 @@ const TestUtils = require("react-dom/test-utils");
 const keycode = require("keycode");
 const sinon = require("sinon");
 const fixture = require("../example/countries");
-const Subject = require("../dist-es5/ReactTags");
+const Subject = require("../dist-es5/Tagger");
 
 let props = null;
 let instance = null;

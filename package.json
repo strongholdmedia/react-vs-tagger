@@ -1,14 +1,13 @@
 {
-    "name": "react-tag-autocomplete",
-    "version": "5.12.6",
+    "name": "@dorgaren/react-vs-tagger",
+    "version": "5.12.8",
     "description": "React VS Tagger is a simple but versatile tag control",
     "main": "dist-es5/Tagger.js",
     "jsnext:main": "dist-es6/Tagger.js",
     "scripts": {
-        "pretest": "npm run lint && npm run build:es5",
+        "pretest": "npm run build:es5",
         "test": "jasmine",
         "coverage": "nyc --include 'dist-es5/**' npm test",
-        "lint": "standard lib/*.js spec/*.js",
         "dev": "webpack-dev-server --progress --env.NODE_ENV=development",
         "build:example": "webpack -p --env.NODE_ENV=production --config-name example",
         "build:es5": "buble lib --objectAssign -o dist-es5",
@@ -17,26 +16,35 @@
     },
     "keywords": [
         "react",
+        "preact",
         "tags",
+        "tagger",
         "tag input",
         "react-component",
         "autosuggest",
         "autocomplete"
     ],
-    "author": "Matt Hinchliffe",
+    "author": {
+        "name": "Viktor Csiki",
+        "url": "https://dorgaren.digital"
+    },
     "contributors": [
-        "Prakhar Srivastav",
-        "Simon Hötten",
-        "Andre-John Mas",
-        "Mike Kamermans",
-        "Juliette Prétot",
-        "Andrew Pillsbury",
-        "Axel Niklasson",
-        "Serhiy Yefremenko",
-        "Paul Shannon"
+        "Matt Hinchliffe (https://github.com/i-like-robots)",
+        "Prakhar Srivastav (https://github.com/prakhar1989)",
+        "Simon Hötten (https://github.com/shoetten)",
+        "Isaev Igor (https://github.com/itoldya)",
+        "Ray Nicholus (https://github.com/rnicholus)",
+        "Andre-John Mas (https://github.com/ajmas)",
+        "Steven Oxley (https://github.com/xonev)",
+        "Mike Kamermans (https://github.com/Pomax)",
+        "Juliette Prétot (https://github.com/juliettepretot)",
+        "Andrew Pillsbury (https://github.com/APILLSBURY)",
+        "Axel Niklasson (https://github.com/axelniklasson)",
+        "Serhiy Yefremenko (https://github.com/yefrem)",
+        "Paul Shannon (https://github.com/paulshannon)"
     ],
     "license": "MIT",
-    "repository": "https://github.com/strongholdmedia/react-vs-tags",
+    "repository": "https://github.com/strongholdmedia/react-vs-tagger",
     "peerDependencies": {
         "prop-types": "^15.0.0",
         "react": "^15.0.0 || ^16.0.0",
@@ -54,7 +62,6 @@
         "react": "^16.8.0",
         "react-dom": "^16.8.0",
         "sinon": "^7.3.0",
-        "standard": "^12.0.1",
         "webpack": "^3.6.0",
         "webpack-dev-server": "^2.8.2"
     }
