@@ -1,6 +1,6 @@
 {
     "name": "@dorgaren/react-vs-tagger",
-    "version": "5.12.8",
+    "version": "5.12.9",
     "description": "React VS Tagger is a simple but versatile tag control",
     "main": "dist-es5/Tagger.js",
     "jsnext:main": "dist-es6/Tagger.js",
