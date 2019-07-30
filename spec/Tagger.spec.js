@@ -11,6 +11,24 @@ const Subject = require("../dist-es5/Tagger");
 let props = null;
 let instance = null;
 
+const CLASS_NAMES = {
+    root: "vs tagger",
+    rootFocused: "vs tagger focused",
+    selected: "selected",
+    selectedTag: "tag",
+    selectedTagName: "tag-title",
+    search: "tag-entry",
+    searchInput: "tag-input-wrapper",
+    suggestions: "tag-choices",
+    suggestionActive: "active",
+    suggestionDisabled: "disabled"
+};
+
+function classToSelector(classSpec)
+{
+    return classSpec.split(" ").map(function(item) { return "." + item }).join("");
+}
+
 function createInstance(data = {})
 {
     if (instance) { teardownInstance(); }
@@ -90,10 +108,10 @@ describe("React Tags", () =>
 
         it("renders the basic components", () =>
         {
-            expect($(".react-tags")).toBeTruthy();
-            expect($(".react-tags__selected")).toBeTruthy();
-            expect($(".react-tags__search")).toBeTruthy();
-            expect($(".react-tags__search-input")).toBeTruthy();
+            expect($(classToSelector(CLASS_NAMES.root))).toBeTruthy();
+            expect($(classToSelector(CLASS_NAMES.selected))).toBeTruthy();
+            expect($(classToSelector(CLASS_NAMES.search))).toBeTruthy();
+            expect($(classToSelector(CLASS_NAMES.searchInput))).toBeTruthy();
         });
     });
 
@@ -135,10 +153,10 @@ describe("React Tags", () =>
             createInstance()
 
             TestUtils.Simulate.focus($("input"))
-            expect($(".is-focused")).toBeTruthy()
+            expect($(classToSelector(CLASS_NAMES.rootFocused))).toBeTruthy()
 
             TestUtils.Simulate.blur($("input"))
-            expect($(".is-focused")).toBeNull()
+            expect($(classToSelector(CLASS_NAMES.rootFocused))).toBeNull()
         })
 
         it("calls focus and blur callbacks when provided", () =>
@@ -230,7 +248,7 @@ describe("React Tags", () =>
             createInstance({ tags: [ fixture[0], fixture[1] ] });
 
             type(query);
-            click($(".react-tags__selected-tag"));
+            click($(classToSelector(CLASS_NAMES.selectedTag)));
 
             const input = $("input");
             expect(input.value).toEqual("");
@@ -241,7 +259,7 @@ describe("React Tags", () =>
             createInstance({ tags: [ fixture[0], fixture[1] ], clearInputOnDelete: false });
 
             type(query);
-            click($(".react-tags__selected-tag"));
+            click($(classToSelector(CLASS_NAMES.selectedTag)));
 
             const input = $("input");
             expect(input.value).toEqual(query);
@@ -351,20 +369,20 @@ describe("React Tags", () =>
 
             key("down");
             expect(input.getAttribute("aria-activedescendant")).toEqual(results[0].id);
-            expect(results[0].className).toMatch(/is-active/);
+            expect(results[0].className).toMatch(CLASS_NAMES.suggestionActive);
 
             key("down", "down");
             expect(input.getAttribute("aria-activedescendant")).toEqual(results[2].id);
-            expect(results[2].className).toMatch(/is-active/);
+            expect(results[2].className).toMatch(CLASS_NAMES.suggestionActive);
 
             key("down");
             expect(input.getAttribute("aria-activedescendant")).toEqual(results[0].id);
-            expect(results[0].className).toMatch(/is-active/);
+            expect(results[0].className).toMatch(CLASS_NAMES.suggestionActive);
 
             key("up", "up");
 
             expect(input.getAttribute("aria-activedescendant")).toEqual(results[1].id);
-            expect(results[1].className).toMatch(/is-active/);
+            expect(results[1].className).toMatch(CLASS_NAMES.suggestionActive);
         });
 
         it("does not allow selection of disabled options", () =>
@@ -427,12 +445,12 @@ describe("React Tags", () =>
 
         it("renders selected tags", () =>
         {
-            expect($$(".react-tags__selected-tag").length).toEqual(instance.props.tags.length);
+            expect($$(classToSelector(CLASS_NAMES.selectedTag)).length).toEqual(instance.props.tags.length);
         });
 
         it("triggers removal when a tag is clicked", () =>
         {
-            click($(".react-tags__selected-tag"));
+            click($(classToSelector(CLASS_NAMES.selectedTag)));
             sinon.assert.calledOnce(props.handleDelete);
             sinon.assert.calledWith(props.handleDelete, sinon.match(0));
         });
