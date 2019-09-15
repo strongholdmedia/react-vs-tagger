@@ -1,7 +1,7 @@
 # React VS Tagger
 
 React VS Tagger is a simple tagging component ready to drop in your React projects.
-Originally based on the [React Tag Autocomplete project](https://github.com/i-like-robots/react-tag-autocomplete) by Matt Hinchliffe.
+Originally based on the [React Tags project](https://github.com/i-like-robots/react-tags) by Matt Hinchliffe.
 Forked due to multiple reasons, namely:
 
 * I supposed it were hard to argue for the original modification goal of making the input optional
